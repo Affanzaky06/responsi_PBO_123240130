@@ -30,9 +30,32 @@ public class KaryawanController {
     
     public void tambah(){
         String nama = fk.getjTextFieldNama().getText();
-        String posisi = fk.getjTextFieldNama().getText();
-        String kontribusi = fk.getjTextFieldNama().getText();
-        String kedisiplinan = fk.getjTextFieldNama().getText();
+        String posisi = fk.getjComboBoxPos().getToolTipText();
+        Double kontribusi = Double.parseDouble(fk.getjTextFieldKontribusi().getText());
+        Double kedisiplinan = Double.parseDouble(fk.getjTextFieldKedisiplinan().getText()); 
+        Double kerjasama = Double.parseDouble(fk.getjTextFieldKerjasama().getText()) ;
+        
+        if (kontribusi <0 || kontribusi>5 ) {
+            JOptionPane.showMessageDialog(null, "Input harus angka 0 - 5");
+        }
+        
+        if (kedisiplinan <0 || kedisiplinan>5 ) {
+            JOptionPane.showMessageDialog(null, "Input harus angka 0 - 5");
+        }
+        
+        if (kerjasama <0 || kerjasama>5 ) {
+            JOptionPane.showMessageDialog(null, "Input harus angka 0 - 5");
+        }
+        
+        double nilai = (kontribusi*0.3)+(kedisiplinan*0.3)+(kerjasama*0.3);
+        
+        karyawan fk = new karyawan();
+        
+        dao.insert(fk);
+        
+        JOptionPane.showMessageDialog(null, "data berhasil masuk");
+        clear();
+        
         
     }
 }
