@@ -5,6 +5,7 @@
 package responsi_pbo.controller;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import responsi_pbo.database.karyawanDAO;
 import responsi_pbo.model.karyawan;
 import responsi_pbo.view.FrameKaryawan;
@@ -28,6 +29,21 @@ public class KaryawanController {
         fk.getjTextFieldKerjasama().setText("");
     }
     
+    public void loadTable(){
+        List<karyawan> list = dao.getAll();
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("NAMA");
+        model.addColumn("POSISI");
+        model.addColumn("KONTRIBUSI");
+        model.addColumn("KEDISIPLINAN");
+        model.addColumn("KERJASAMA");
+        model.addColumn("NILAI AKHIR");
+        model.addColumn("STATUS ");
+        
+    }
+    
     public void tambah(){
         String nama = fk.getjTextFieldNama().getText();
         String posisi = fk.getjComboBoxPos().getToolTipText();
@@ -48,6 +64,10 @@ public class KaryawanController {
         }
         
         double nilai = (kontribusi*0.3)+(kedisiplinan*0.3)+(kerjasama*0.3);
+        
+        if (nilai <= 3.5) {
+            String status = "putus";
+        }
         
         karyawan fk = new karyawan();
         
